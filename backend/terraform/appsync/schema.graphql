@@ -1,0 +1,118 @@
+
+type Series {
+	id: ID!
+	name: String!
+	premiere: AWSDateTime
+	type: SeriesType
+	language: String
+	genres: [String]
+	status: SeriesStatus
+	runtime: Int
+	officialUrl: String
+	schedule: [AWSDateTime]
+	network: ID
+	tvrage: String
+	thetvdb: String
+	imdb: String
+	image: S3Object
+	summary: String
+	updated: AWSDateTime
+}
+
+type SeriesConnection {
+	items: [Series]
+	nextToken: String
+}
+
+enum SeriesStatus {
+	ENDED
+}
+
+enum SeriesType {
+	SCRIPTED
+}
+
+enum Gender {
+	MALE
+	FEMALE
+}
+
+type Episode {
+	id: ID!
+	name: String
+	season: Int
+	number: Int
+	airdate: AWSDateTime
+	runtime: Int
+	image: S3Object
+	summary: String
+}
+
+type EpisodeConnection {
+	items: [Episode]
+	nextToken: String
+}
+
+type Network {
+	id: ID!
+	name: String
+	country: String
+}
+
+type NetworkConnection {
+	items: [Network]
+	nextToken: String
+}
+
+type Person {
+	id: ID!
+	name: String
+	country: String
+	dob: AWSDateTime
+	dod: AWSDateTime
+	gender: Gender
+	image: S3Object
+	series: SeriesConnection
+}
+
+type PersonConnection {
+	items: [Person]
+	nextToken: String
+}
+
+type Character {
+	id: ID!
+	name: String
+	person: Person
+	series: Series
+}
+
+type CharacterConnection {
+	items: [Character]
+	nextToken: String
+}
+
+extend type Query {
+	listFavoriteSeries(id: ID, limit: Int, nextToken: String): [SeriesConnection]
+	listSeries(limit: Int, nextToken: String): [SeriesConnection]
+	listNetworks(limit: Int, nextToken: String): [NetworkConnection]
+	listPersons(limit: Int, nextToken: String): [PersonConnection]
+	listCharacters(seriesId: ID!, limit: Int, nextToken: String): [CharacterConnection]
+	getSeries(id: ID!): Series
+	getEpisode(id: ID!): Episode
+	getPerson(id: ID!): Person
+	getCharacter(id: ID!): Character
+	getNetwork(id: ID!): Network
+}
+
+type S3Object {
+  bucket: String
+  key: String
+  region: String
+  url: AWSURL
+  uploadUrl: AWSURL
+}
+
+type Query {}
+
+type Mutation {}
