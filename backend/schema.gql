@@ -1,0 +1,40 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  listShows: [Show]!
+}
+
+type Mutation {
+  addFavorite: Bool
+}
+
+type Show {
+  id: ID!
+  name: String!
+  episodes: [Episode]!
+  genres: [String]!
+}
+
+type Episode {
+  id: ID!
+  name: String
+  show: Show
+  season: Season
+  number: Int
+  network: Network
+}
+
+type Season {
+  id: ID!
+  name: String
+  episodes: [Episode]!
+}
+
+type Network {
+  id: ID!
+  name: String!
+  country: String
+}
