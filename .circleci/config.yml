@@ -3,10 +3,11 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+    working_directory: ~/frontend
     steps:
+      - run: ls
       - checkout
-      - run: cd frontend
-
+      - run: ls
       # Download and cache dependencies
       - restore_cache:
           keys:
