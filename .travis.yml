@@ -1,9 +1,6 @@
 language: node_js
 node_js:
   - "12"
-env:
-  matrix:
-    secure: Eg5eLM2sTnfTz1Qk4B7q2yPM5p6lexnVeE482fvrAb7/p6nklbgJqT62nnJIBTycBAaf/PnePZ56RiB4OrkIt95U4O3PUgzfrEKRgwzgzOHyIMUTQ/9EId84YRET0J1JbbkvcwwF5IKWImedeUVBVZPFvFB8UhKq0aRiyGIBJLgPL1dEiuWJJZyco4NuXTbY5RqnxcV+dnivepp+ROh/Z7TlYjzz9IP2i2x7sVDBbfVVjJpJZgS7+elc29h/g1miHJEeGdk2p/TGIlIPwexKLwaOvCwcr/Pak2c/E+RMH/ZxNehS/UiprxxWsWOXL7/OKfCtR8lq+FgUEBRgKbNQ6mcjGNAbOhxIXlREM8JsNsdjqJ/8pGEqCClYqImixlvNNkgV9w3b4QxLaI5lMketGKsx5SAs6v7bZolzYrKNHXPbT2zRvsA0osOvWXG5cKx2HmfIFswHUKIGeoIkFyOAMSm06BrfT6hR6VWuCeIMORGSxmVeFOfqfy84jybmvBjcReu+ELA5AWThVpRma2A556LoghO5Up7B3jSUhYZGmj3XQvL+Xv8Hn9SyXK+1GkFPM9CcjZUMapXvPleAY9jPZiHaeAZQ6A13p7uMCopvKPaPgGVqwuQVPbkNYzo/NG5iD0hKXfKOIW5UkNKFLQI4CcqGF1ptT251A5Z93DPawbg=
 jobs:
   include:
     - stages:
@@ -15,4 +12,7 @@ jobs:
         - name: deploy
           if: branch = master
           before_script: cd frontend
-          script: "./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN"
+          deploy:
+            provider: firebase
+            token:
+              secure: "Eg5eLM2sTnfTz1Qk4B7q2yPM5p6lexnVeE482fvrAb7/p6nklbgJqT62nnJIBTycBAaf/PnePZ56RiB4OrkIt95U4O3PUgzfrEKRgwzgzOHyIMUTQ/9EId84YRET0J1JbbkvcwwF5IKWImedeUVBVZPFvFB8UhKq0aRiyGIBJLgPL1dEiuWJJZyco4NuXTbY5RqnxcV+dnivepp+ROh/Z7TlYjzz9IP2i2x7sVDBbfVVjJpJZgS7+elc29h/g1miHJEeGdk2p/TGIlIPwexKLwaOvCwcr/Pak2c/E+RMH/ZxNehS/UiprxxWsWOXL7/OKfCtR8lq+FgUEBRgKbNQ6mcjGNAbOhxIXlREM8JsNsdjqJ/8pGEqCClYqImixlvNNkgV9w3b4QxLaI5lMketGKsx5SAs6v7bZolzYrKNHXPbT2zRvsA0osOvWXG5cKx2HmfIFswHUKIGeoIkFyOAMSm06BrfT6hR6VWuCeIMORGSxmVeFOfqfy84jybmvBjcReu+ELA5AWThVpRma2A556LoghO5Up7B3jSUhYZGmj3XQvL+Xv8Hn9SyXK+1GkFPM9CcjZUMapXvPleAY9jPZiHaeAZQ6A13p7uMCopvKPaPgGVqwuQVPbkNYzo/NG5iD0hKXfKOIW5UkNKFLQI4CcqGF1ptT251A5Z93DPawbg="
