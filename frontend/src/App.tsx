@@ -8,6 +8,7 @@ const App = () => (
 		<Switch>
 			<Route path="/" component={NavBar} />
 		</Switch>
+		<div>CircleCI works!</div>
 	</Router>
 );
 
