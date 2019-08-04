@@ -8,10 +8,10 @@ const StyledNavLink = styled(NavLink).attrs({
 })`
 	&:link,
 	&:visited {
-		color: ${props => props.theme.global.colors.brand};
+		color: ${({ theme }) => theme && theme.colors && theme.colors.brand};
 	}
 	&.${activeClassName} {
-		color: ${props => props.theme.global.colors['accent-1']};
+		color: ${({ theme }) => theme && theme.colors && theme.colors.brand};
 	}
 `;
 
