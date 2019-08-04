@@ -8,7 +8,7 @@ type Query {
 }
 
 type Mutation {
-  addFavorite: Bool
+  addFavorite: Boolean
 }
 
 type Show {
