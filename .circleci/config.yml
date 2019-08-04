@@ -3,11 +3,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
-    working_directory: ~/repo/frontend
     steps:
       - run: ls
-      - checkout:
-          path: ~/repo
+      - checkout
       - run: pwd
       - run: ls
       # Download and cache dependencies
@@ -17,8 +15,10 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn install
-
+      - run:
+          name: "Install"
+          command: yarn install
+          working_directory: ~/project/frontend
       - save_cache:
           paths:
             - node_modules
@@ -26,10 +26,11 @@ jobs:
 
       # run tests!
       #- run: yarn test
-      - run: yarn build
       - run:
           name: "Build"
           command: "yarn build"
+          working_directory: ~/project/frontend
       - run:
           name: "Deploy to Firebase"
           command: "./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN"
+          working_directory: ~/project/frontend
