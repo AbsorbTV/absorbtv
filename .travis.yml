@@ -7,10 +7,12 @@ env:
 jobs:
   include:
     - stages:
+        - name: build
+          before_script: cd frontend
+          script:
+            - "yarn"
+            - "yarn build"
         - name: deploy
           if: branch = master
-      before_script: cd frontend
-      script:
-        - "yarn"
-        - "yarn build"
-        - "./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN"
+          before_script: cd frontend
+          script: "./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN"
